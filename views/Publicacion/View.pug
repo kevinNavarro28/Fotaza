@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+      
+    body 
+        include ../Modulo/Header.pug  
+        div(id="content" )
+            div(class="container bg-dark p-3 mx-auto" id="contenedor-create")
+                div(class="row justify-content-center")
+
+                    //- Cuerpo de la imagen
+
+                    div(class="col-sm-6" id="section-foto")
+                        div(id="cuerpo-foto")
+                            if(Publicacion.Imagenes.estado == "Protegido")
+                                img(src=`/private/${Publicacion.Imagenes.nombre}` id="myImg")
+                            else
+                                img(src=`/public/${Publicacion.Imagenes.nombre}` id="myImg")
+
+                            if(Sum > 0 && Count > 0)
+                                span(class="text-start text-light" style="margin-left: 40px;")=`Valoracion: ${Sum/Count} /5`
+                            else 
+                                span(class="text-start text-light" style="margin-left: 40px;")=`Valoracion: 0/5`
+
+                            //- Mostrar opciones de editar/eliminar solo al propietario
+                            if(Usuario.id === Publicacion.usuario_id)
+                                div(class="dropdown" id="dropdown")
+                                    button(type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown")
+                                        i(class="fa-regular fa-pen-to-square")
+                                  
+                                    ul(class="dropdown-menu")
+                                        li
+                                            a(class="dropdown-item" href=`/Publicacion/Update/${Publicacion.id}`)="Editar"
+                                        li
+                                            a(class="dropdown-item" href=`/Publicacion/Delete/${Publicacion.id}` onclick="return confirmDeletion(event)")="Eliminar"
+                                    script.
+                                         function confirmDeletion(event) {
+                                         var confirmed = confirm("¿Estás seguro de que deseas eliminar esta foto?");
+                                            if (!confirmed) {
+                                             event.preventDefault();
+                                             }
+                                            }
+                        div(class="d-flex flex-column align-items-center" id="cuerpo-descripcion") 
+                            if(!Valorado)
+                                form(class="card-body" action="/Valoracion/Create" method="POST")
+                                    div 
+                                        i.fa-regular.fa-star(onclick="calificar(this)" style="cursor: pointer; color: white;" id="1")
+                                        span(class="fa-regular fa-star" onclick="calificar(this)" style="cursor: pointer; color: white;" id="2")
+                                        span(class="fa-regular fa-star" onclick="calificar(this)" style="cursor: pointer; color: white;" id="3")
+                                        span(class="fa-regular fa-star" onclick="calificar(this)" style="cursor: pointer; color: white;" id="4")
+                                        span(class="fa-regular fa-star" onclick="calificar(this)" style="cursor: pointer; color: white;" id="5")
+                                        input(type="hidden" id="valoracion" name="Estrellas" value="0")
+                                    input(type="hidden" name="publicacion_id" value=`${Publicacion.id}`)
+                                    input(type="submit", class="btn btn-success" value="Valorar")
+
+                            h6(class="font-weight-bold text-light" id="titulo-create")=`${Publicacion.titulo}`
+                            h6(class="font-weight-bold text-light")=`Propietario: ${Publicacion.Usuario.nombre} ${Publicacion.Usuario.apellido}`
+
+                    //- cuerpo de los comentarios 
+
+                    div(class="col-sm-6" id="section-comentarios")
+                        div(class="container")
+                            div(class="bg-light" id="contenedor")
+                                for val in Comentarios
+                                    div(class="d-flex") 
+                                        img(src=`/avatar/${val.Usuario.avatar}`, alt="" class="p-2" id="img-Comentarios")
+                                        div(id="content-Comentarios")=`${val.Usuario.nickname} `
+                                            - const formatDate = (date) => new Date(date).toDateString();
+                                        div(id="Comentarios" title=`${formatDate(val.fecha)}`)=`${val.descripcion}`
+
+                            form(class="d-flex form-inline position-relative my-2 d-inline-block" action="/Comentario/Create" method="POST")
+                                textarea(name="Descripcion", cols="30", rows="2" class="form-control" id="campo-comentario" style="margin-right: 2px;")
+                                input(type="hidden", name="publicacion_id" value=`${Publicacion.id}`)
+                                button(type="submit" class="btn btn-success")="Comentar"

@@ -1,0 +1,61 @@
+:root{
+    --dark: #16191c;
+    --dark-x: #1e2126;
+    --light: #ffffff;
+  }
+  
+  body{
+    font-family: "Spartan", sans-serif;
+    font-weight: 300;
+    color: var(--black);
+  }
+  
+  .bg-red { background-color: red !important; }
+  .bg-red-x { background-color:red; }
+  
+  .font-control, .btn {
+    min-height: 3.125rem;
+    line-height: initial;
+  }
+  
+  .img-1 {
+    background-image: url("../img/Login1.webp");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .img-2 {
+    background-image: url("../img/Login2.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  #Logo{
+    width: 200px;
+    height: 150px;
+    border-radius: 25px;
+  }
+
+  #password {
+    padding-right: 40px; /* Aumentar el padding para el ícono */
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+#togglePasswordRegister {
+ 
+  
+  transform: translateY(10%);
+}
+
+#togglePassword {
+ 
+  
+  transform: translateY(35%);
+}

@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+      
+    body 
+        include ../Modulo/Header.pug  
+        div(id="content")
+            div(class="container p-2")
+                div(class="row")
+                    if (Publicacion && Publicacion.length > 0)
+                        for val in Publicacion
+                            div(class="column-public")
+                                div(class="container-image")
+                                    a(href=`/Publicacion/showOne/${val.id}`)
+                                        if(val.Imagenes.estado == "Protegido")
+                                            img(src=`/private/${val.Imagenes.nombre}` id="myImg")
+                                        if(val.Imagenes.estado == "Publico")
+                                            img(src=`/public/${val.Imagenes.nombre}` id="myImg")
+                    else
+                        h4(style="margin-left: 25rem;")="No hay coincidencias"

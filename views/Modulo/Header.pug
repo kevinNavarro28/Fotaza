@@ -1,0 +1,47 @@
+div(class="d-flex flex-column")
+            nav(class="navbar navbar-expand-lg navbar-dark bg-black")
+                div(class="container-fluid")
+                    a(class="navbar-brand d-flex align-items-left" href="/Home")
+                        img(src="/img/Logo.png" id="Logo" class="img-fluid mr-1")
+
+                    button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+                        span(class="navbar-toggler-icon")
+
+                    div(class="collapse navbar-collapse aling-left" id="navbarNav")
+                        ul(class="navbar-nav ml-auto")
+                            li(class="nav-item")
+                                a(class="nav-link" href="/Home")
+                                    i(class="fas fa-home mr-2 lead")
+                                    | Inicio
+                            li(class="nav-item")
+                                a(class="nav-link" href="/Usuario")
+                                    i(class="fas fa-user mr-2 lead")
+                                    | Perfil
+                            li(class="nav-item")
+                                a(class="nav-link" href="/Publicacion/Create")
+                                    i(class="fa-solid fa-image mr-2 lead")
+                                    | Compartir Imagen
+                            li(class="nav-item")
+                                a(class="nav-link" href="/MisPublicaciones")
+                                    i(class="fa-solid fa-book")
+                                    | Mis Publicaciones
+
+                    div(class="d-flex align-items-center ml-2")
+                        form(action="/BuscarHome" method="POST" class="d-flex form-inline")
+                            input(class="form-control" type="search" name="search" placeholder="Buscar" aria-label="Buscar")
+                            button(class="btn btn-success ml-2" type="submit")
+                                i(class="fas fa-search")
+
+                        div(class="dropdown mx-5")
+                            button(class="btn btn-secondary dropdown-toggle" href="#" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false")
+                                if(Usuario.avatar == "null")
+                                    img(src=`/img/Perfil.jpg` id="img-perfil" alt="")
+                                else
+                                    img(src=`/avatar/${Usuario.avatar}` id="img-perfil" alt="")
+                                = `${Usuario.nickname}`
+
+                            ul(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+                                li
+                                    a(class="dropdown-item" href="/Usuario")="Configuración"
+                                li
+                                    a(class="dropdown-item" href="/Salir")="Cerrar sesión"

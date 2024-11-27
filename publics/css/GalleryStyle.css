@@ -1,0 +1,69 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  body{
+    color: blue;
+  }
+  
+  /* Create four equal columns that sits next to each other */
+  .column {
+    flex: 100%;
+    max-width: 33.5%;
+    padding: 0 4px;
+  }
+
+  .column-public {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+  }
+
+  .column_fav {
+    flex: 100%;
+    max-width: 100%;
+    padding: 0 4px;
+    border-radius: 15px;
+  }
+
+  .column-public img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+  }
+  
+  .column_fav img{
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+    border-radius: 15px;
+  }
+  
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media screen and (max-width: 800px) {
+    .column .column_fav .column-public {
+      flex: 50%;
+      max-width: 50%;
+    }
+  }
+  
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .column .column_fav .column-public {
+      flex: 100%;
+      max-width: 100%;
+    }
+  }
+
+.container{
+  border-radius: 15px;
+  
+}
+

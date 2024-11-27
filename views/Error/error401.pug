@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+    body
+        div(class="w-100")   
+            nav(class="navbar navbar-expand-sm navbar-light " id="navbar")
+                div(style="margin-left: 20px;")
+                    a(href="/") 
+                        img(src="../img/Logo.png" id="Logo" class="img-fluid")
+
+                div(class="container")
+                    form(class="d-flex form-inline position-relative my-2 d-inline-block")
+                        
+
+                    div
+                        a(href="/Login" class="btn btn-success" style="margin-right: 2px;")="Login" 
+                        a(href="/login/Registrarse" class="btn btn-success")="Registrase" 
+
+            
+        div(class="text-center  bg-dark")
+            img(src="/img/Error 401 no autorizado.jpg" class="p-3" style="border-radius: 55px;")
+
+               

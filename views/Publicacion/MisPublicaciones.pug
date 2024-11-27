@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+    body
+        include ../Modulo/Header.pug
+        div(class="row justify-content-center")
+         div(class="col-sm-6")
+            div(class="container bg-dark text-center")
+                h4(class="p-2 text-light")= "Mis Publicaciones"
+                div(class="row")
+                    div(class="column_fav")
+                        if (Publicacion && Publicacion.length > 0)
+                            for val in Publicacion
+                                a(href=`/Publicacion/showOne/${val.id}`)
+                                    if (val.Imagenes && val.Imagenes.estado)
+                                        if(val.Imagenes.estado == "Protegido")
+                                            img(src=`/private/${val.Imagenes.nombre}` id="myImg")
+                                        if(val.Imagenes.estado == "Publico")
+                                            img(src=`/public/${val.Imagenes.nombre}` id="myImg")
+                                    else
+                                        p= "Imagenes estado no disponible"
+                        else
+                            p(class="text-light")= "No se encontraron publicaciones"

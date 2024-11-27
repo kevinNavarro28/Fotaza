@@ -1,0 +1,58 @@
+:root{
+    --dark: #16191c;
+    --dark-x: #1e2126;
+    --light: #ffffff;
+}
+
+body {
+    overflow: auto;
+    font-family: "Muli",sans-serif;
+    font-weight: 300;
+    color: var(--dark);
+}
+
+.bg-primary { background-color: var(--dark-x) !important; }
+
+a {
+    text-decoration: none;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+}
+
+#sidebar-container .menu{
+    width: 14rem;
+}
+
+#navbar {
+    background-color: #1d225c;
+    padding-left: 0;
+}
+
+#img-perfil {
+    width: 32px;
+    height: 32px;
+    border-radius: 25px;
+}
+
+#fondo-main {
+    /* background-color: lavender; */
+}
+
+#Logo{
+    width: 150px;
+    height: 100px;
+    border-radius: 25px;
+    margin-left: 0;
+  }
+
+div #content{
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.custom-sidebar-red {
+    background-color: rgb(88, 42, 42) !important;
+}

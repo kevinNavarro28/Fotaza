@@ -1,0 +1,69 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+      
+    body 
+        include ../Modulo/Header.pug  
+    
+        div(class="container")
+            div(class="container bg-dark p-3 " id="contenedor-create")
+                h1(class="text-light font-weight-bold text-center")= "Datos de la publicacion"
+                form(action="/Publicar/Private" method="POST" id="formulario" enctype="multipart/form-data")
+                    div(class="row justify-content-center")
+                        div(class="col-sm-6" id="section-foto")
+                            //- cargar imagen
+                            div(id="image-container bg-dark")
+                                div(class="bg-dark")
+                                    img(src="/img/Perfil.jpg" class="myImg"  id="image-create")
+                                    input(type="hidden" name="resolucion" id="resolucion" value="")
+                                    input(type="file" id="image" class="text-light btn btn-secondary"  name="image" accept="image/png,image/jpeg,image/jpg,image/webp,image/gif" onchange="preview(event)")
+                        
+                        div(class="col-sm-6" id="section-comentarios")
+                            div(class="container")
+                                div(class="container bg-dark")
+                                    div
+                                        //- cargar Datos
+                                        div(class="mb-4")
+                                            label(for="Titulo" class="form-label text-light font-weight-bold")= "Titulo"
+                                            textarea(cols="30", rows="2" name="Titulo" type="text" placeholder="Ingrese su Titulo" class="form-control bg-dark-x border-0")
+
+                                        div(class="mb-4")
+                                            label(for="Estado" class="form-label text-light font-weight-bold")= "Estado"
+                                            select(name="Estado" id="Estado" onchange="cambiarEstado()" class="form-control text-dark bg-dark-x border-0")
+                                                option(value="Protegido" selected)="Protegido"
+                                                option(value="Publico")="Publico"
+                                        
+                                        div(class="mb-4")
+                                            label(for="Derecho_Uso" class="form-label text-light font-weight-bold")= "Derechos de uso"
+                                            select(name="Derecho_Uso" id="Derecho_Uso" onchange="cambiarDerecho()" class="form-control text-dark bg-dark-x border-0")
+                                                option(value="Copyright" selected)="Copyright"
+                                                option(value="Copyleft")="Copyleft"
+
+                                        div(class="mb-4")
+                                            label(for="Categoria" class="form-label text-light font-weight-bold")= "Categoria"
+                                            select(name="Categoria" class="form-control text-dark bg-dark-x border-0")
+                                                option(value="Ninguno" selected)="Ninguno" 
+                                                option(value="Colegio")="Colegio" 
+                                                option(value="Juguetes")="Juguetes" 
+                                                option(value="Animales")="Animales" 
+                                                option(value="Alimentos")="Alimentos" 
+                                                option(value="Ropa")="Ropa" 
+                                                option(value="Transporte")="Transporte"
+                                                option(value="Autos")="Autos"
+                                                option(value="Oficios")="Oficios" 
+                                                option(value="Partes del Cuerpo")="Partes del Cuerpo" 
+                                                option(value="Muebles")="Muebles" 
+                                                option(value="Instrumentos Musicales")="Instrumentos Musicales" 
+                                                option(value="Flores")="Flores"
+                                                option(value="Otros")="Otros"
+                                        
+                                        div(class="mb-4")
+                                            label(for="etiquetas" class="form-label text-light font-weight-bold")= "Etiquetas:"
+                                            br 
+                                            input(type="text" name="Etiquetas" id="etiqueta" placeholder="  Viajes,Comercio,Fotos...")
+
+                                        if Usuario 
+                                            input(type="hidden" name="usuario_id" value=`${Usuario.id}`)
+                                            br
+                                            
+                                button(class="btn btn-success ms-6 " id="btn-compartir" type="submit")="Compartir"

@@ -1,0 +1,119 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+      
+    body 
+    include ../Modulo/Header.pug  
+
+    div(id="content" )
+                    div(class="container bg-dark p-3 mx-auto " id="contenedor-create")
+                        div
+                            div(class="row")
+                            
+                                //- Cuerpo de la imagen
+
+                                div(class="col-sm-6" id="section-foto")
+                                    //- cargar imagen
+                                    div(id="image-container bg-dark")
+                                        div(class="bg-dark")
+                                            if(Publicacion.Imagenes.estado == "Protegido")
+                                                img(src=`/private/${Publicacion.Imagenes.nombre}` id="myImg")
+                                            else
+                                                img(src=`/public/${Publicacion.Imagenes.nombre}` id="myImg")
+
+                                //- cuerpo de los comentarios 
+
+                                div(class="col-sm-6" id="section-comentarios")
+                                    div(class="container")
+                                        div(class="container bg-dark")
+                                            h1(class="text-light font-weight-bold")= "Actualizar Publicacion"
+                                            form(action="/Publicacion/Update", method="post") 
+                                                //- cargar Datos
+                                                div(class="mb-4")
+                                                    label(for="Titulo" class="form-label text-light font-weight-bold")= "Titulo"
+                                                    input(type="text" name="Titulo" placeholder="Ingrese su Titulo" class="form-control bg-dark-x border-0" value=`${Publicacion.titulo}`)
+
+                                                div(class="mb-4")
+                                                    label(for="Categoria" class="form-label text-light font-weight-bold")= "Categoria"
+                                                    select(name="Categoria" class="form-control text-dark bg-dark-x border-0")
+                                                        if(Publicacion.categoria == "Ninguno")
+                                                            option(value="Ninguno" selected)="Ninguno"
+                                                        else 
+                                                            option(value="Ninguno")="Ninguno"
+
+                                                        if(Publicacion.categoria == "Colegio")
+                                                            option(value="Colegio" selected)="Colegio"
+                                                        else 
+                                                            option(value="Colegio")="Colegio"
+
+                                                        if(Publicacion.categoria == "Juguetes")
+                                                            option(value="Juguetes" selected)="Juguetes"
+                                                        else 
+                                                            option(value="Juguetes")="Juguetes"
+
+                                                        if(Publicacion.categoria == "Animales")
+                                                            option(value="Animales" selected)="Animales"
+                                                        else 
+                                                            option(value="Animales")="Animales"
+
+                                                        if(Publicacion.categoria == "Alimentos")
+                                                            option(value="Alimentos" selected)="Alimentos"
+                                                        else 
+                                                            option(value="Alimentos")="Alimentos"
+
+                                                        if(Publicacion.categoria == "Ropa")
+                                                            option(value="Ropa" selected)="Ropa"
+                                                        else 
+                                                            option(value="Ropa")="Ropa"
+
+                                                        if(Publicacion.categoria == "Transporte")
+                                                            option(value="Transporte" selected)="Transporte"
+                                                        else 
+                                                            option(value="Transporte")="Transporte"
+
+                                                        if(Publicacion.categoria == "Autos")
+                                                            option(value="Autos" selected)="Autos"
+                                                        else 
+                                                            option(value="Autos")="Autos"    
+
+                                                        if(Publicacion.categoria == "Oficios")
+                                                            option(value="Oficios" selected)="Oficios"
+                                                        else 
+                                                            option(value="Oficios")="Oficios"
+
+                                                        if(Publicacion.categoria == "Partes del Cuerpo")
+                                                            option(value="Partes del Cuerpo" selected)="Partes del Cuerpo"
+                                                        else 
+                                                            option(value="Partes del Cuerpo")="Partes del Cuerpo"
+
+                                                        if(Publicacion.categoria == "Muebles")
+                                                            option(value="Muebles" selected)="Muebles"
+                                                        else 
+                                                            option(value="Muebles")="Muebles"
+
+                                                        if(Publicacion.categoria == "Instrumentos Musicales")
+                                                            option(value="Instrumentos Musicales" selected)="Instrumentos Musicales"
+                                                        else 
+                                                            option(value="Instrumentos Musicales")="Instrumentos Musicales"
+
+                                                        if(Publicacion.categoria == "Flores")
+                                                            option(value="Flores" selected)="Flores"
+                                                        else 
+                                                            option(value="Flores")="Flores"
+                                                        if(Publicacion.categoria == "Otros")
+                                                            option(value="Otros" selected)="Otros"
+                                                        else 
+                                                            option(value="Otros")="Otros"
+                                                        
+                                                        
+                                                div(class="mb-4")
+                                                    label(for="Etiquetas" class="form-label text-light font-weight-bold")= "Etiquetas"
+                                                    input(type="text" name="Etiquetas" placeholder="Viajes,Comercio,Fotos..." value=`${Publicacion.Etiquetas.nombre}` class="form-control text-dark bg-dark-x border-0")
+                                                
+                                                input(type="hidden" name="publicacion_id" value=`${Publicacion.id}`)
+                                                input(type="hidden" name="etiqueta_id" value=`${Publicacion.Etiquetas.id}`)
+                                                    
+                                                button(class="btn btn-success" id="btn-compartir" type="submit")="Actualizar" 
+                                                br
+                                                a(href=`/Publicacion/showOne/${Publicacion.id}` class="btn btn-success p-3" ,style="margin-right: 4px;")
+                                                    i(class="fa fa-reply")   

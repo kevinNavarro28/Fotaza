@@ -1,0 +1,101 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+    body 
+        include ../Modulo/Header.pug
+        section   
+            div(class="container-fluid mt-3" id="content" )
+                div(class="container p-1")
+                    div(class="row")
+                        div(class="col-sm-6")
+                            div(class="align-self-center")
+                                div(class="container bg-dark text-center")
+                                    h1(class="text-light font-weight-bold")= "Datos Personales"
+                                    form(action="/Usuario/Update" method="POST" enctype="multipart/form-data")
+                                        div(id="image-container bg-dark")
+                                            div(class="bg-dark")
+                                                input(type="file" id="image" class="btn btn-secondary" name="Avatar" accept="image/png,image/jpeg,image/jpg,image/webp,image/gif" onchange="perfil(event)")
+                                                if(Usuario.avatar != "null")
+                                                    img(src=`/avatar/${Usuario.avatar}` id="image-perfil")
+                                                else 
+                                                    img(src="/img/Perfil.jpg" id="image-perfil")
+
+                                        div(class="mb-4")
+                                            label(for="Nombre" class="form-label text-light font-weight-bold")= "Nombre"
+                                            input(name="Nombre" type="text" placeholder="Ingrese su nombre" class="form-control bg-dark-x border-0" value=`${Usuario.nombre}`)
+
+                                        div(class="mb-4")
+                                            label(for="Apellido" class="form-label text-light font-weight-bold")= "Apellido"
+                                            input(name="Apellido" type="text" placeholder="Ingrese su apellido" class="form-control bg-dark-x border-0" value=`${Usuario.apellido}`)
+
+                                        div(class="mb-4")
+                                            label(for="Email" class="form-label text-light font-weight-bold")= "Email"
+                                            input(name="Email" type="text" placeholder="Ingrese su email" class="form-control bg-dark-x border-0" value=`${Usuario.email}`)
+
+                                        div(class="mb-4")
+                                            label(for="Telefono" class="form-label text-light font-weight-bold")= "Telefono"
+                                            input(name="Telefono" type="text" placeholder="Ingrese su telefono" class="form-control bg-dark-x border-0" value=`${Usuario.telefono}`)
+
+                                        div(class="mb-4")
+                                            label(for="Fecha_nac" class="form-label text-light font-weight-bold")= "Fecha de Nacimiento"
+                                            input(name="Fecha_Nac" type="date" placeholder="Ingrese su fecha de nacimiento" class="form-control bg-dark-x border-0" value=`${Usuario.fecha_nac}`)
+                                        
+                                        div(class="mb-4")
+                                            label(for="Interes" class="form-label text-light font-weight-bold")= "Interes"
+                                            if(Usuario.interes == null)
+                                                input(type="text" name="Interes" placeholder="Ingrese sus interes" style="resize: none;" class="form-control bg-dark-x border-0")
+                                            else
+                                                input(type="text" name="Interes" placeholder="Ingrese sus interes" style="resize: none;" class="form-control bg-dark-x border-0" value=`${Usuario.interes}`)
+                                        div(class="mb-4")
+                                            label(for="Nickname" class="form-label text-light font-weight-bold")= "Nickname"
+                                            input(name="Nickname" type="text" placeholder="Ingrese su telefono" class="form-control bg-dark-x border-0" value=`${Usuario.nickname}`)
+                                        
+                                        div(class="p-3" )
+                                            input(type="submit" id="btn-actualizar" value="Actualizar" class="btn btn-primary ", style="margin-right: 4px;")
+                            
+                        div(class="col-sm-6")
+                            div(class="container bg-dark text-center p-3" id="container_watermark")
+                                if(!Usuario.watermark)            
+                                    form(action="/Usuario/Textomark" method="POST" id="formulario") 
+                                        div
+                                           h3(class="text-light font-weight-bold")= "Marca de Agua Personalizada"
+                                        div(class="mb-4")
+                                            label(class="form-label text-light font-weight-bold" for="Tipo")= "Tipo de Marca" 
+                                            select(class="form-control" name="Tipo" id="Tipo" onchange="cambiarWatermark()" required)
+                                                option(value="Imagen") Imagen 
+                                                option(value="Texto" selected) Texto
+                                        
+                                        div(class="mb-4")
+                                            div(id="valor")
+                                                label(class="form-label text-light font-weight-bold" for="watermark")= "Introduce Un Texto"
+                                                input(class="form-control" type="text" name="watermark" id="watermark" required)
+                                        
+                                        div(class="mb-4")
+                                            div(id="boton")
+                                                button(class="btn btn-success"  type="submit") Guardar
+                                else
+                                    form(action="/Usuario/Delete" method="POST") 
+                                        if(Usuario.watermark.tipo == "Imagen")
+                                            table 
+                                                tr
+                                                    th
+                                                        h2(class="text-light font-weight-bold") Mi marca de agua
+                                                tr 
+                                                    th
+                                                        img(style="width: 200px; height: 200px; border-radius: 25px;" src=`/watermark/${Usuario.watermark.marca}`)
+                                                tr
+                                                    td 
+                                                        input(type="hidden" name="watermark_id" id="watermark_id" value=`${Usuario.watermark.id}`)
+                                                        button(class="btn btn-success"  type="submit") Borrar
+                                        if(Usuario.watermark.tipo == "Texto")
+                                            table
+                                                tr
+                                                   th
+                                                        h2(class="text-light font-weight-bold") Mi marca de agua
+                                                tr
+                                                    th
+                                                        h3(class="text-light font-weight-bold")=Usuario.watermark.marca
+                                                tr
+                                                    td 
+                                                        input(class="btn btn-success" type="hidden" name="watermark_id" id="watermark_id" value=`${Usuario.watermark.id}`)
+                                                        button(class="btn btn-success" type="submit") Borrar

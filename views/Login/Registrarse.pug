@@ -1,0 +1,79 @@
+doctype html
+html(lang="en")
+    include ../Modulo/head.pug
+    link(rel="stylesheet", href="/css/LoginStyle.css" type="text/css")
+
+    body(class="bg-dark") 
+        section 
+            div(class="row g-0")
+                div(class="col-sm-7 d-none d-lg-block")
+                    div(id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel")
+                        div(class="carousel-indicators")
+                            button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1")
+                            button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2")
+
+                        div(class="carousel-inner")
+                            div(class="carousel-item img-1 min-vh-100 active")
+                                div(class="carousel-caption d-none d-md-block")
+                                    h5(class="font-weight-bold") Sube,Comparté y Divierte...
+                            
+                            div(class="carousel-item img-2 min-vh-100")
+                                div(class="carousel-caption d-none d-md-block")
+                                    h5(class="font-weight-bold") Siempre hay algo nuevo para descubrir...
+
+                        button(class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev")
+                            span(class="carousel-control-prev-icon" aria-hidden="true")
+                            span(class="visually-hidden") Previous
+                        button(class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next")
+                            span(class="carousel-control-next-icon" aria-hidden="true")
+                            span(class="visually-hidden") Next
+
+                div(class="col-sm-5 d-flex flex-column align-items-end min-vh-95")
+                    div(class="px-lg-5 py-lg-4 p-4 w-100 align-self-center")
+                        div(id="error" class="text-dark" style="width: 300px;")
+                        h1(class="text-light font-weight-bold")= "Registrarse"
+                        form(action="/Login/Registrarse" method="POST")
+
+                            div(class="mb-4")
+                                label(for="Nombre" class="form-label text-light font-weight-bold")= "Nombre"
+                                input(name="Nombre" type="text" placeholder="Ingrese su nombre" class="form-control bg-dark-x border-0")
+
+                            div(class="mb-4")
+                                label(for="Apellido" class="form-label text-light font-weight-bold")= "Apellido"
+                                input(name="Apellido" type="text" placeholder="Ingrese su apellido" class="form-control bg-dark-x border-0")
+
+                            div(class="mb-4")
+                                label(for="Email" class="form-label text-light font-weight-bold")= "Email"
+                                input(name="Email" type="text" placeholder="Ingrese su email" class="form-control bg-dark-x border-0" required)
+
+                            div(class="mb-4 position-relative")
+                                label(for="Clave" class="form-label text-light font-weight-bold")= "Clave"
+                                input#password(name="Clave" type="password" placeholder="Ingrese su clave" class="form-control bg-dark-x border-0" required)
+                                i.fas.fa-eye.position-absolute(style="right: 15px; top: 40px; cursor: pointer;" id="togglePassword")
+
+                            div(class="mb-4")
+                                label(for="Telefono" class="form-label text-light font-weight-bold")= "Telefono"
+                                input(name="Telefono" type="text" placeholder="Ingrese su telefono" class="form-control bg-dark-x border-0")
+
+                            div(class="mb-4")
+                                label(for="fecha_nac" class="form-label text-light font-weight-bold")= "Fecha de Nacimiento"
+                                input(name="fecha_nac" type="date" placeholder="Ingrese su fecha de nacimiento" class="form-control bg-dark-x border-0")
+                            
+                            div(class="mb-4")
+                                label(for="Nickname" class="form-label text-light font-weight-bold")= "Nickname"
+                                input(name="Nickname" type="text" placeholder="Ingrese su Nick" class="form-control bg-dark-x border-0")
+                            if error
+                                div(class="alert alert-danger")= error
+
+                            div
+                                a(href="/" class="btn btn-success p-3" ,style="margin-right: 4px;")
+                                    i(class="fa fa-reply")
+                                input(type="submit" value="Registrarse" class="btn btn-primary" ,style="margin-right: 4px;")
+        script.
+            document.getElementById('togglePassword').addEventListener('click', function (e) {
+                const passwordInput = document.getElementById('password');
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+           
